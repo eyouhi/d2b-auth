@@ -1,10 +1,6 @@
-use axum::{http::StatusCode, Json};
-mod _test;
-
-pub async fn user_list() -> (StatusCode, Json<serde_json::Value>) {
-    todo!()
-}
-
-pub async fn user_detail() -> (StatusCode, Json<serde_json::Value>) {
-    todo!()
-}
+mod user;
+mod user_test;
+pub use user::{
+    user_create, user_delete, user_detail, user_group_create, user_group_delete, user_group_detail,
+    user_group_list, user_leave_group, user_list, user_to_group,
+};
