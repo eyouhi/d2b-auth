@@ -1,10 +1,26 @@
-mod _test;
+mod dept;
+mod right;
 mod role;
+mod root_test;
 mod user;
 use axum::{routing::get, Router};
-pub use role::*;
-pub use user::*;
+use dept::*;
+use right::*;
+use role::*;
+use user::*;
 
-pub fn root_router() -> Router {
+fn root_router() -> Router {
     Router::new().route("/", get(|| async { "Hello, world!" }))
+}
+
+pub fn route_app() -> Router {
+    Router::new()
+        .nest("/", root_router())
+        .nest("/user", user_router())
+        .nest("/user-group", user_group_router())
+        .nest("/role", role_router())
+        .nest("/role-group", role_group_router())
+        .nest("/right", right_router())
+        .nest("/right-group", right_group_router())
+        .nest("/dept", dept_router())
 }

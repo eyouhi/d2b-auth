@@ -1,8 +1,9 @@
-use crate::controllers::role::*;
 use axum::{
     routing::{delete, get, post},
     Router,
 };
+
+use crate::controllers::role::*;
 
 pub fn role_group_router() -> Router {
     Router::new()
