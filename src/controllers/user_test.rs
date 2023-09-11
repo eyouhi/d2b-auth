@@ -1,6 +1,6 @@
 #[tokio::test]
 async fn user_list() {
-    use super::user_list;
+    use super::user::user_list;
     use axum::http::StatusCode;
     let (code, res) = user_list().await;
     assert_eq!(code, StatusCode::OK);
@@ -9,7 +9,7 @@ async fn user_list() {
 
 #[tokio::test]
 async fn user_create() {
-    use super::user_create;
+    use super::user::user_create;
     use axum::http::StatusCode;
     let (code, res) = user_create().await;
     assert_eq!(code, StatusCode::CREATED);
@@ -18,7 +18,7 @@ async fn user_create() {
 
 #[tokio::test]
 async fn user_detail() {
-    use super::user_detail;
+    use super::user::user_detail;
     use axum::http::StatusCode;
     let (code, res) = user_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
@@ -30,7 +30,7 @@ async fn user_detail() {
 
 #[tokio::test]
 async fn user_delete() {
-    use super::user_delete;
+    use super::user::user_delete;
     use axum::http::StatusCode;
     let (code, res) = user_delete(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
@@ -39,7 +39,7 @@ async fn user_delete() {
 
 #[tokio::test]
 async fn user_group_list() {
-    use super::user_group_list;
+    use super::user::user_group_list;
     use axum::http::StatusCode;
     let (code, res) = user_group_list().await;
     assert_eq!(code, StatusCode::OK);
@@ -48,7 +48,7 @@ async fn user_group_list() {
 
 #[tokio::test]
 async fn user_group_create() {
-    use super::user_group_create;
+    use super::user::user_group_create;
     use axum::http::StatusCode;
     let (code, res) = user_group_create().await;
     assert_eq!(code, StatusCode::CREATED);
@@ -57,7 +57,7 @@ async fn user_group_create() {
 
 #[tokio::test]
 async fn user_group_detail() {
-    use super::user_group_detail;
+    use super::user::user_group_detail;
     use axum::http::StatusCode;
     let (code, res) = user_group_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
@@ -66,7 +66,7 @@ async fn user_group_detail() {
 
 #[tokio::test]
 async fn user_group_delete() {
-    use super::user_group_delete;
+    use super::user::user_group_delete;
     use axum::http::StatusCode;
     let (code, res) = user_group_delete(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
