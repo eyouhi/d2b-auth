@@ -3,6 +3,8 @@ use axum::{
     http::StatusCode,
 };
 
+use crate::modules::user::{User, UserGroup};
+
 pub async fn user_list() -> (StatusCode, Json<serde_json::Value>) {
     (
         StatusCode::OK,
@@ -25,29 +27,10 @@ pub async fn user_create() -> (StatusCode, Json<serde_json::Value>) {
     )
 }
 
-pub async fn user_detail(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
-    match id {
-        1 => (
-            StatusCode::OK,
-            Json(serde_json::json!({
-                "id": 1,
-                "name": "Alice",
-            })),
-        ),
-        2 => (
-            StatusCode::OK,
-            Json(serde_json::json!({
-                "id": 2,
-                "name": "Bob",
-            })),
-        ),
-        _ => (
-            StatusCode::NOT_FOUND,
-            Json(serde_json::json!({
-                "error": "User not found",
-            })),
-        ),
-    }
+pub async fn user_detail(Path(id): Path<usize>) -> (StatusCode, Json<User>) {
+    let mut user = User::default();
+    user.set_id(id);
+    (StatusCode::OK, Json(user))
 }
 
 pub async fn user_delete(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
@@ -81,21 +64,10 @@ pub async fn user_group_create() -> (StatusCode, Json<serde_json::Value>) {
     )
 }
 
-pub async fn user_group_detail(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
-    (
-        StatusCode::OK,
-        Json(serde_json::json!({
-            "id": id,
-            "name": "钉钉项目组",
-            "members": [{
-                "id": 1,
-                "name": "Alice",
-            }, {
-                "id": 2,
-                "name": "Bob",
-            }],
-        })),
-    )
+pub async fn user_group_detail(Path(id): Path<usize>) -> (StatusCode, Json<UserGroup>) {
+    let mut user_group = UserGroup::default();
+    user_group.set_id(id);
+    (StatusCode::OK, Json(user_group))
 }
 
 pub async fn user_group_delete(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {

@@ -22,10 +22,6 @@ async fn user_detail() {
     use axum::http::StatusCode;
     let (code, res) = user_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
-    assert_eq!(res.0.as_object().unwrap()["name"], "Alice");
-    let (code, res) = user_detail(axum::extract::Path(2)).await;
-    assert_eq!(code, StatusCode::OK);
-    assert_eq!(res.0.as_object().unwrap()["name"], "Bob");
 }
 
 #[tokio::test]
@@ -61,7 +57,6 @@ async fn user_group_detail() {
     use axum::http::StatusCode;
     let (code, res) = user_group_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
-    assert_eq!(res.0.as_object().unwrap()["name"], "钉钉项目组");
 }
 
 #[tokio::test]

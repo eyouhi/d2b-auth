@@ -1,5 +1,7 @@
 use axum::{extract::Path, http::StatusCode, Json};
 
+use crate::modules::role::{Role, RoleGroup};
+
 pub async fn role_leave_group(
     Path((id, cid)): Path<(usize, usize)>,
 ) -> (StatusCode, Json<serde_json::Value>) {
@@ -29,13 +31,10 @@ pub async fn role_group_list() -> (StatusCode, Json<serde_json::Value>) {
     )
 }
 
-pub async fn role_group_detail(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
-    (
-        StatusCode::OK,
-        Json(serde_json::json!({
-            "msg": format!("Role group {}", id),
-        })),
-    )
+pub async fn role_group_detail(Path(id): Path<usize>) -> (StatusCode, Json<RoleGroup>) {
+    let mut role_group = RoleGroup::default();
+    role_group.set_id(id);
+    (StatusCode::OK, Json(role_group))
 }
 
 pub async fn role_group_delete(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
@@ -76,13 +75,10 @@ pub async fn role_create() -> (StatusCode, Json<serde_json::Value>) {
     )
 }
 
-pub async fn role_detail(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {
-    (
-        StatusCode::OK,
-        Json(serde_json::json!({
-            "msg": format!("Role {}", id),
-        })),
-    )
+pub async fn role_detail(Path(id): Path<usize>) -> (StatusCode, Json<Role>) {
+    let mut role = Role::default();
+    role.set_id(id);
+    (StatusCode::OK, Json(role))
 }
 
 pub async fn role_delete(Path(id): Path<usize>) -> (StatusCode, Json<serde_json::Value>) {

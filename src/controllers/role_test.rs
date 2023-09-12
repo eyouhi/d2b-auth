@@ -20,9 +20,8 @@ async fn role_create() {
 async fn role_detail() {
     use super::role::role_detail;
     use axum::http::StatusCode;
-    let (code, res) = role_detail(axum::extract::Path(1)).await;
+    let (code, _) = role_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
-    assert!(res.0.is_object());
 }
 
 #[tokio::test]
@@ -56,9 +55,8 @@ async fn role_group_create() {
 async fn role_group_detail() {
     use super::role::role_group_detail;
     use axum::http::StatusCode;
-    let (code, res) = role_group_detail(axum::extract::Path(1)).await;
+    let (code, _) = role_group_detail(axum::extract::Path(1)).await;
     assert_eq!(code, StatusCode::OK);
-    assert!(res.0.is_object());
 }
 
 #[tokio::test]
